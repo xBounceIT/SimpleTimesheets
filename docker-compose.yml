@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15 # Using PostgreSQL version 15
+    container_name: simpletimesheets-db
+    restart: always
+    ports:
+      - "5432:5432" # Expose default PostgreSQL port
+    environment:
+      POSTGRES_USER: user # Replace with a secure user if needed
+      POSTGRES_PASSWORD: password # Replace with a secure password
+      POSTGRES_DB: simpletimesheets
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Persist data
+
+volumes:
+  postgres_data:
+    driver: local

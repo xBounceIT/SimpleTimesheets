@@ -1,0 +1,634 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+  /* New Modern Theme Colors */
+  --bg-light: #f7f6f3;
+  --text-primary-light: #333333;
+  --text-secondary-light: #666666;
+  --accent-light: #f9a76f;  /* Warm peach/orange color */
+  --accent-hover-light: #f78f47;
+  --border-light: #e0e0e0;
+  --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  --input-bg-light: #f0f0f0;
+
+  /* Dark Mode Colors (adjusted to be softer) */
+  --bg-dark: #1a1a1a;
+  --text-primary-dark: #f0f0f0;
+  --text-secondary-dark: #c0c0c0;
+  --accent-dark: #f9a76f;  /* Keep the same accent in dark mode */
+  --accent-hover-dark: #f78f47;
+  --border-dark: #333333;
+  --input-bg-dark: #303030;
+
+  /* Add a danger color */
+  --danger-color: #e53e3e; /* Red color */
+  --danger-color-hover: #c53030; /* Darker red on hover */
+
+  /* Current Mode Defaults */
+  --background: var(--bg-light);
+  --text-primary: var(--text-primary-light);
+  --text-secondary: var(--text-secondary-light);
+  --accent: var(--accent-light);
+  --accent-hover: var(--accent-hover-light);
+  --border: var(--border-light);
+  --input-bg: var(--input-bg-light);
+
+  /* Inverted Button Colors for Light Mode */
+  --login-button-bg: var(--bg-dark);
+  --login-button-bg-hover: #333333; /* Slightly lighter dark */
+
+  /* Add theme variables to the existing CSS */
+  --primary-color: var(--accent-light);
+  --background-color: var(--bg-light);
+  --text-color: var(--text-primary-light);
+  --card-background: #ffffff;
+  --border-color: var(--border-light);
+  
+  /* Global transition property for theme changes */
+  --theme-transition-duration: 0.3s;
+  --theme-transition-timing: cubic-bezier(0.4, 0, 0.2, 1); /* Material Design easing */
+  --theme-transition: background-color var(--theme-transition-duration) var(--theme-transition-timing),
+                      color var(--theme-transition-duration) var(--theme-transition-timing),
+                      border-color var(--theme-transition-duration) var(--theme-transition-timing),
+                      box-shadow var(--theme-transition-duration) var(--theme-transition-timing);
+
+  font-family: 'Poppins', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* When theme is changing, temporarily disable transitions on all elements that haven't started transitioning yet */
+:root[style*="--theme-applying"] * {
+  transition-delay: 0s !important;
+  animation-delay: 0s !important;
+  /* Ensure all elements start their transitions simultaneously */
+  transition-duration: var(--theme-transition-duration) !important;
+  transition-timing-function: var(--theme-transition-timing) !important;
+}
+
+[data-theme='dark'] {
+  --primary-color: var(--accent-dark);
+  --background-color: var(--bg-dark);
+  --text-color: var(--text-primary-dark);
+  --card-background: #252525;
+  --border-color: var(--border-dark);
+  --input-bg: var(--input-bg-dark);
+  --text-primary: var(--text-primary-dark);
+  --text-secondary: var(--text-secondary-dark);
+
+  /* Inverted Button Colors for Dark Mode */
+  --login-button-bg: var(--bg-light);
+  --login-button-bg-hover: #e0e0e0; /* Slightly darker light */
+
+  /* Danger color in dark mode could be slightly adjusted if needed */
+  /* --danger-color: #fc8181; */
+  /* --danger-color-hover: #f56565; */
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 20px;
+  transition: var(--theme-transition);
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+h2 {
+  color: var(--text-color);
+  margin: 24px 0 16px;
+  font-weight: 600;
+  transition: var(--theme-transition);
+}
+
+/* Form h2 styling */
+form h2 {
+  color: var(--text-color);
+  transition: var(--theme-transition);
+  font-size: 1.5rem;
+}
+
+form {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto 32px;
+  padding: 32px;
+  background-color: var(--card-background);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  box-sizing: border-box;
+}
+
+input, select {
+  width: 100%;
+  padding: 14px;
+  margin: 8px 0;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  transition: var(--theme-transition);
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+input:focus, select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+button {
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  margin: 8px 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--theme-transition), transform 0.2s ease;
+  font-size: 1rem;
+  text-transform: uppercase; /* Make all button text uppercase */
+}
+
+button:hover {
+  background-color: var(--accent-hover);
+}
+
+/* Login Form Specific Styles */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 80vh;
+}
+
+.login-form {
+  background-color: var(--card-background);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: var(--card-shadow);
+  width: 100%;
+  max-width: 420px;
+  margin: 0;
+  transition: var(--theme-transition);
+}
+
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 32px;
+  color: var(--text-color);
+  font-size: 1.8rem;
+  font-weight: 700;
+  transition: var(--theme-transition);
+}
+
+.login-form p {
+  text-align: center;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+.form-field {
+  margin-bottom: 28px;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--text-color);
+  font-size: 0.95rem;
+  transition: var(--theme-transition);
+}
+
+.login-form input {
+  padding: 14px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  transition: var(--theme-transition);
+}
+
+/* Style for placeholder text */
+.login-form input::placeholder {
+  font-size: 0.85rem; /* Adjust size as needed */
+  color: var(--text-secondary); /* Optional: Adjust placeholder color */
+  opacity: 0.7; /* Optional: Make placeholder slightly transparent */
+}
+
+.login-button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 16px;
+  padding: 14px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  background-color: var(--login-button-bg);
+  color: var(--text-color);
+  transition: var(--theme-transition);
+}
+
+.login-button:hover {
+  background-color: var(--login-button-bg-hover);
+}
+
+/* Trouble signing in text */
+.login-help {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Register account link */
+.register-account {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.register-account a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.register-account a:hover {
+  text-decoration: underline;
+}
+
+/* Password input container */
+.password-input-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+}
+
+.password-input-container input {
+  flex: 1;
+  padding-right: 70px;
+}
+
+.show-password-button {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto !important;
+  min-width: 60px;
+  height: auto;
+  background: none;
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 6px 10px;
+  margin: 0;
+  border-radius: 6px;
+}
+
+.show-password-button:hover {
+  background-color: rgba(249, 167, 111, 0.1);
+}
+
+/* Standard button colors */
+button[type="submit"],
+.add-user-form button[type="submit"] {
+  background-color: var(--accent);
+  width: fit-content; /* Make button width fit its content */
+  margin-left: auto;   /* Center the button */
+  margin-right: auto;  /* Center the button */
+}
+
+button[type="submit"]:hover,
+.add-user-form button[type="submit"]:hover {
+  background-color: var(--accent-hover);
+}
+
+/* Make edit buttons match the concept style */
+.edit-button,
+.edit-button.button-as-link {
+  background-color: var(--accent);
+  text-transform: uppercase; /* Ensure link styled as button is also uppercase */
+}
+
+.edit-button:hover,
+.edit-button.button-as-link:hover {
+  background-color: var(--accent-hover);
+}
+
+/* Theme Toggle Button Positioning */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000; /* Ensure it's above other content */
+  /* Optional: adjust padding/margin if needed */
+  padding: 8px 12px;
+  margin: 0; 
+  /* Keep existing button styles or customize */
+}
+
+/* Hamburger Menu Button Styling */
+.hamburger-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1001; /* Above content, below sidebar/overlay */
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.5rem; /* Make icon larger */
+  line-height: 1; /* Adjust line height for icon */
+  transition: background-color 0.2s ease;
+}
+
+.hamburger-button:hover {
+  background-color: var(--accent-hover);
+}
+
+/* Sidebar Styling */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px; /* Adjust width as needed */
+  height: 100%;
+  background-color: var(--card-background); /* Use card background for consistency */
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out, background-color var(--theme-transition-duration) var(--theme-transition-timing); /* Add theme transition */
+  z-index: 1100; /* Highest z-index */
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border-color); /* Add subtle border */
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color); /* Separator */
+  background-color: var(--background-color); /* Optional: slight contrast */
+  transition: var(--theme-transition);
+}
+
+.sidebar-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: var(--theme-transition);
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0 8px;
+  line-height: 1;
+}
+
+.close-button:hover {
+  color: var(--text-primary);
+  background: none; /* Override default button hover */
+}
+
+.sidebar-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Space between nav items */
+  flex-grow: 1; /* Allow content to fill space */
+  overflow-y: auto; /* Add scroll if content overflows */
+}
+
+.nav-item {
+  display: block; /* Ensure links take full width */
+  padding: 12px 15px;
+  text-decoration: none;
+  color: var(--text-secondary);
+  border-radius: 6px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.nav-item:hover {
+  background-color: rgba(0, 0, 0, 0.05); /* Subtle hover */
+  color: var(--accent);
+  text-decoration: none; /* Remove underline on hover */
+}
+
+[data-theme='dark'] .nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.08); /* Dark mode hover */
+}
+
+.logout-button {
+  margin-top: auto; /* Push logout to the bottom */
+  background-color: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent); /* Style as an outline button */
+  text-align: center;
+  font-weight: 600;
+}
+
+.logout-button:hover {
+  background-color: var(--accent);
+  color: white;
+}
+
+/* Overlay for when sidebar is open */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black */
+  z-index: 1050; /* Below sidebar, above everything else */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.sidebar.open + .overlay { /* Select overlay only when sidebar is open */
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Adjust main content padding if needed to avoid overlap */
+/* 
+.main-content {
+  padding-top: 70px;  /* Example: Adjust if toggle button overlaps */
+/* } 
+*/
+
+/* Admin Panel Container */
+.admin-panel-container {
+  width: 100%;
+  max-width: 900px; /* Wider max-width for admin panel */
+  margin: 20px auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Styling for the Add User Form rows */
+.add-user-form .form-row {
+  display: flex;
+  gap: 16px; /* Add gap between elements in a row */
+  margin-bottom: 16px; /* Space between rows */
+}
+
+.add-user-form .form-row > * {
+  flex: 1; /* Make elements in a row share space equally */
+}
+
+/* Ensure single elements in a row take full width */
+.add-user-form .form-row > input:only-child,
+.add-user-form .form-row > select:only-child,
+.add-user-form .form-row > .password-input-container:only-child,
+.add-user-form .form-row > button:only-child:not(.button-row > button) { /* Exclude the button in button-row */
+  flex-basis: 100%;
+}
+
+/* Center the button in the specific button row */
+.add-user-form .button-row {
+  justify-content: center; /* Center flex items */
+}
+
+/* Override flex behavior for the button inside button-row */
+.add-user-form .button-row > button {
+  flex-grow: 0; /* Don't allow button to grow */
+  flex-basis: auto; /* Reset basis from 100% */
+}
+
+/* Add User Form Heading */
+.add-user-form h3 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* User List Container */
+.user-list-container {
+  margin-top: 40px; /* Add space above the user list */
+  background-color: var(--card-background); /* Match form background */
+  border-radius: 16px; /* Match form border-radius */
+  padding: 32px; /* Match form padding */
+  box-shadow: var(--card-shadow); /* Match form shadow */
+  transition: var(--theme-transition);
+}
+
+/* Search Bar Container */
+.search-bar-container {
+  margin-bottom: 16px; /* Add same margin as user cards below */
+}
+
+.user-list-container h3 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* User Card Styling */
+.user-card {
+  /* Change from flex to block to stack elements vertically */
+  /* display: flex; */ 
+  display: block;
+  /* justify-content: space-between; */ /* No longer needed for vertical layout */
+  /* align-items: center; */ /* No longer needed for vertical layout */
+  background-color: var(--input-bg); /* Use input background for cards */
+  padding: 16px 20px;
+  border-radius: 10px; /* Slightly rounded corners for cards */
+  margin-bottom: 16px; /* Space between user cards */
+  border: 1px solid var(--border-color);
+  transition: var(--theme-transition);
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column; /* Stack info vertically */
+  gap: 6px; /* Space between info items */
+}
+
+.user-info > div { /* Style each info line (name, email, role) */
+  display: flex;
+  align-items: baseline; /* Align label and value */
+  gap: 8px;
+}
+
+.user-label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  min-width: 50px; /* Align values */
+}
+
+.user-value {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.user-actions {
+  display: flex;
+  gap: 10px; /* Space between buttons */
+  margin-top: 16px; /* Add space above the buttons */
+  justify-content: flex-end; /* Align buttons to the right */
+}
+
+/* Style action buttons (Edit, Delete) */
+.user-actions .edit-button,
+.user-actions .delete-button {
+  padding: 8px 16px; /* Smaller padding for action buttons */
+  font-size: 0.9rem;
+  margin: 0; /* Reset margin */
+  border-radius: 8px; /* Ensure consistent border radius */
+  font-weight: 600; /* Use Semi-Bold for a clearer bold effect */
+}
+
+/* Add specific color for edit button text */
+.user-actions .edit-button {
+  color: white;
+}
+
+/* Remove underline on hover for edit button (which is a Link) */
+.user-actions .edit-button:hover {
+  text-decoration: none;
+  /* Background color hover is handled by the general .edit-button:hover rule */
+}
+
+/* Delete Button Specific Styling */
+.delete-button {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: var(--danger-color-hover);
+}

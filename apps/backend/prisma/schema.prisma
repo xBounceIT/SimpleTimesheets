@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL") // Takes the DATABASE_URL from .env file
+}
+
+enum Role {
+  ADMIN
+  MANAGER
+  SUB_MANAGER
+  USER
+}
+
+model User {
+  id          Int         @id @default(autoincrement())
+  email       String      @unique
+  password    String // Hash stored here
+  role        Role        @default(USER)
+  firstName   String?
+  lastName    String?
+  timeEntries TimeEntry[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  // Relations
+  managedClients Client[] @relation("SubManagerClients")
+}
+
+model Client {
+  id          Int         @id @default(autoincrement())
+  name        String
+  // Add other client details as needed
+  projects    Project[]
+  timeEntries TimeEntry[] // Optional, for easier reporting
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  subManagers User[] @relation("SubManagerClients")
+}
+
+model Project {
+  id          Int         @id @default(autoincrement())
+  name        String
+  clientId    Int
+  client      Client      @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  // Add other project details as needed
+  tasks       Task[]
+  timeEntries TimeEntry[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Task {
+  id          Int         @id @default(autoincrement())
+  name        String
+  projectId   Int
+  project     Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  description String?     // Add optional description field
+  timeEntries TimeEntry[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model TimeEntry {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  clientId  Int      // Denormalized for easier querying/reporting
+  client    Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  projectId Int
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  taskId    Int
+  task      Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  duration  Int // Store duration in minutes or seconds (choose one and be consistent)
+  notes     String?
+  date      DateTime // The date the work was performed (consider @db.Date if only date is needed)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Consider adding startTime/endTime if needed, instead of or alongside duration
+  // startTime DateTime?
+  // endTime   DateTime?
+}
