@@ -47,7 +47,7 @@ export function HamburgerMenu({ onLogout, role }: HamburgerMenuProps) {
             // Show all other tabs for non-ADMIN roles
             <>
               <Link to="/" className="nav-item" onClick={toggleSidebar}>
-                Dashboard
+                Timesheet
               </Link>
               <Link to="/projects" className="nav-item" onClick={toggleSidebar}>
                 Projects

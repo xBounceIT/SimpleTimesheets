@@ -40,7 +40,7 @@ This project aims to create a modern, web-based time tracking application inspir
 *   **User Authentication:** Internal database authentication (Register, Login).
 *   **Data Models:** Clients, Projects, Tasks, Time Entries, Users.
 *   **Basic CRUD APIs:** Endpoints for managing Clients, Projects, Tasks (creation/reading initially).
-*   **Basic Frontend Pages:** Login, Registration, Placeholder Dashboard.
+*   **Basic Frontend Pages:** Login, Registration, Placeholder Timesheet.
 *   **Core Time Entry API:** Endpoint to submit time entries.
 
 ## 5. Database Schema (Conceptual - via Prisma)
@@ -67,7 +67,7 @@ This project aims to create a modern, web-based time tracking application inspir
     *   Configure Prisma, define initial schema, run first migration.
     *   Implement User model and basic internal authentication (register, login endpoints & frontend flow).
     *   Set up basic API modules/controllers/services for Clients, Projects, Tasks.
-    *   Create basic Login, Register, and Dashboard pages in the frontend.
+    *   Create basic Login, Register, and Timesheet pages in the frontend.
 2.  **Phase 2: Time Entry**
     *   Implement the Time Entry form on the frontend (Client -> Project -> Task selection, duration, notes, date).
     *   Implement the backend API endpoint to receive and store time entries.

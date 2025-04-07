@@ -53,7 +53,7 @@ function App() {
             isAuthenticated 
               ? (role === 'ADMIN' 
                   ? <Navigate to="/admin/users" /> 
-                  : <Dashboard role={role} />)
+                  : <Timesheet role={role} />)
               : <Navigate to="/login" />
           } />
           <Route path="/projects" element={isAuthenticated ? <ProjectsManager /> : <Navigate to="/login" />} />
@@ -71,7 +71,7 @@ function App() {
   );
 }
 
-function Dashboard({ role }: { role: string | null }) {
+function Timesheet({ role }: { role: string | null }) {
   const [selectedDate, setSelectedDate] = useState<string>(new Date().toISOString().substring(0, 10));
   const [dailyEntries, setDailyEntries] = useState<TimeEntry[]>([]);
   const [loadingEntries, setLoadingEntries] = useState(false);
@@ -101,7 +101,7 @@ function Dashboard({ role }: { role: string | null }) {
 
   return (
     <div>
-      <h1>Dashboard</h1>
+      <h1>Timesheet</h1>
       <p>Welcome! Please use the navigation to manage your time.</p>
       <TimeEntryForm selectedDate={selectedDate} onDateChange={handleDateChange} />
       <hr />
