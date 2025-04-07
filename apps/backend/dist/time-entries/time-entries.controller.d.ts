@@ -6,62 +6,62 @@ export declare class TimeEntriesController {
     constructor(timeEntriesService: TimeEntriesService);
     create(createTimeEntryDto: CreateTimeEntryDto): Promise<{
         id: number;
-        createdAt: Date;
-        updatedAt: Date;
+        userId: number;
         clientId: number;
         projectId: number;
-        userId: number;
         taskId: number;
         duration: number;
         notes: string | null;
         date: Date;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     findAll(): Promise<{
         id: number;
-        createdAt: Date;
-        updatedAt: Date;
+        userId: number;
         clientId: number;
         projectId: number;
-        userId: number;
         taskId: number;
         duration: number;
         notes: string | null;
         date: Date;
+        createdAt: Date;
+        updatedAt: Date;
     }[]>;
     findOne(id: string): Promise<{
         id: number;
-        createdAt: Date;
-        updatedAt: Date;
+        userId: number;
         clientId: number;
         projectId: number;
-        userId: number;
         taskId: number;
         duration: number;
         notes: string | null;
         date: Date;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     update(id: string, updateTimeEntryDto: UpdateTimeEntryDto): Promise<{
         id: number;
-        createdAt: Date;
-        updatedAt: Date;
+        userId: number;
         clientId: number;
         projectId: number;
-        userId: number;
         taskId: number;
         duration: number;
         notes: string | null;
         date: Date;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     remove(id: string): Promise<{
         id: number;
-        createdAt: Date;
-        updatedAt: Date;
+        userId: number;
         clientId: number;
         projectId: number;
-        userId: number;
         taskId: number;
         duration: number;
         notes: string | null;
         date: Date;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
 }

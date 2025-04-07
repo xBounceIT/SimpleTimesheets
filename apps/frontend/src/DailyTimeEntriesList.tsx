@@ -29,7 +29,7 @@ export function DailyTimeEntriesList({ entries }: DailyTimeEntriesListProps) {
           <li key={entry.id}>
             <strong>{entry.client.name} / {entry.project.name} / {entry.task.name}</strong>
             <br />
-            Duration: {entry.duration} minutes
+            Duration: {entry.duration} hours
             {entry.notes && <><br />Notes: {entry.notes}</>}
           </li>
         ))}

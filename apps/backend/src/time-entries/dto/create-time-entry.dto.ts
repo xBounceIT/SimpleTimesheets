@@ -3,7 +3,7 @@ export class CreateTimeEntryDto {
   clientId: number;
   projectId: number;
   taskId: number;
-  duration: number; // in minutes or seconds
+  duration: number; // in hours
   notes?: string;
   date: Date;
 }

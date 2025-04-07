@@ -6,62 +6,62 @@ export declare class TimeEntriesService {
     constructor(prisma: PrismaService);
     create(createDto: CreateTimeEntryDto): Promise<{
         id: number;
-        createdAt: Date;
-        updatedAt: Date;
+        userId: number;
         clientId: number;
         projectId: number;
-        userId: number;
         taskId: number;
         duration: number;
         notes: string | null;
         date: Date;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     findAll(): Promise<{
         id: number;
-        createdAt: Date;
-        updatedAt: Date;
+        userId: number;
         clientId: number;
         projectId: number;
-        userId: number;
         taskId: number;
         duration: number;
         notes: string | null;
         date: Date;
+        createdAt: Date;
+        updatedAt: Date;
     }[]>;
     findOne(id: number): Promise<{
         id: number;
-        createdAt: Date;
-        updatedAt: Date;
+        userId: number;
         clientId: number;
         projectId: number;
-        userId: number;
         taskId: number;
         duration: number;
         notes: string | null;
         date: Date;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     update(id: number, updateDto: UpdateTimeEntryDto): Promise<{
         id: number;
-        createdAt: Date;
-        updatedAt: Date;
+        userId: number;
         clientId: number;
         projectId: number;
-        userId: number;
         taskId: number;
         duration: number;
         notes: string | null;
         date: Date;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     remove(id: number): Promise<{
         id: number;
-        createdAt: Date;
-        updatedAt: Date;
+        userId: number;
         clientId: number;
         projectId: number;
-        userId: number;
         taskId: number;
         duration: number;
         notes: string | null;
         date: Date;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
 }

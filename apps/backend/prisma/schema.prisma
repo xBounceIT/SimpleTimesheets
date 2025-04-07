@@ -78,7 +78,7 @@ model TimeEntry {
   project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
   taskId    Int
   task      Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
-  duration  Int // Store duration in minutes or seconds (choose one and be consistent)
+  duration  Int // Store duration in hours
   notes     String?
   date      DateTime // The date the work was performed (consider @db.Date if only date is needed)
   createdAt DateTime @default(now())
