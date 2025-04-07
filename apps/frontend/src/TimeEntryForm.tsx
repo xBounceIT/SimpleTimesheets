@@ -107,7 +107,12 @@ export function TimeEntryForm({ selectedDate, onDateChange }: TimeEntryFormProps
         <div className="form-notes">
           <label>
             Notes:
-            <textarea value={notes} onChange={(e) => setNotes(e.target.value)} style={{ width: '100%', minHeight: '80px' }}/>
+            <textarea 
+              value={notes} 
+              onChange={(e) => setNotes(e.target.value)} 
+              className="notes-textarea"
+              placeholder="Enter any additional notes here..."
+            />
           </label>
         </div>
 
