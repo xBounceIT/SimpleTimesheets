@@ -29,38 +29,49 @@ export function HamburgerMenu({ onLogout, role }: HamburgerMenuProps) {
         onClick={toggleSidebar}
         aria-label="Toggle navigation menu"
       >
-        ☰
+        <span className="hamburger-icon">☰</span>
       </button>
 
       <div className={`sidebar ${isOpen ? 'open' : ''}`}>
         <div className="sidebar-header">
-          <h3>Navigation</h3>
-          <button onClick={toggleSidebar} className="close-button">&times;</button>
+          <h3>SimpleTimesheets</h3>
+          <button onClick={toggleSidebar} className="close-button" aria-label="Close menu">&times;</button>
         </div>
         <div className="sidebar-content">
           {role === 'ADMIN' ? (
             // Show only User Management for ADMIN role
             <Link to="/admin/users" className="nav-item" onClick={toggleSidebar}>
-               User Management
+              <span className="nav-icon">👥</span>
+              <span>User Management</span>
             </Link>
           ) : (
             // Show all other tabs for non-ADMIN roles
             <>
               <Link to="/" className="nav-item" onClick={toggleSidebar}>
-                Timesheet
+                <span className="nav-icon">⏱️</span>
+                <span>Timesheet</span>
               </Link>
               <Link to="/projects" className="nav-item" onClick={toggleSidebar}>
-                Projects
+                <span className="nav-icon">📋</span>
+                <span>Projects</span>
               </Link>
               <Link to="/clients" className="nav-item" onClick={toggleSidebar}>
-                Clients
+                <span className="nav-icon">🏢</span>
+                <span>Clients</span>
               </Link>
               <Link to="/tasks" className="nav-item" onClick={toggleSidebar}>
-                Tasks
+                <span className="nav-icon">✓</span>
+                <span>Tasks</span>
               </Link>
             </>
           )}
-          <button className="nav-item logout-button" onClick={onLogout}>Logout</button>
+          <button 
+            className="nav-item logout-button" 
+            onClick={onLogout}
+          >
+            <span className="nav-icon">🚪</span>
+            <span>Logout</span>
+          </button>
         </div>
       </div>
       {isOpen && <div className="overlay" onClick={toggleSidebar}></div>}
