@@ -100,6 +100,7 @@ export function TimeEntryForm({ selectedDate, onDateChange }: TimeEntryFormProps
             inline
             dateFormat="yyyy-MM-dd"
             className="date-picker-inline-container"
+            calendarClassName="react-datepicker-calendar"
           />
         </div>
 
